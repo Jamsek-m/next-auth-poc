@@ -1,5 +1,13 @@
-import NextAuth from "next-auth";
+import NextAuth, { DefaultSession } from "next-auth";
 import { mapToSessionCredentials, refreshAccessToken } from "@/utils/tokens";
+
+export type AppSession = DefaultSession & {
+    accessToken: string,
+    idToken: string,
+    user: {
+        user_id: string;
+    },
+}
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     providers: [
@@ -57,8 +65,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                     (token as any).credentials.refreshToken
                 );
 
-                console.log(refreshedTokens.refreshToken);
-
                 return {
                     ...token,
                     credentials: {
@@ -84,6 +90,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
                 return {
                     ...session,
                     accessToken: (token as any).credentials.accessToken,
+                    idToken: (token as any).credentials.idToken,
                     user: {
                         ...session.user,
                         user_id: token.user_id,

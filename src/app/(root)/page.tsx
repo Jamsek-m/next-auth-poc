@@ -1,10 +1,8 @@
-import { signOut } from "@/config/auth";
 import { protectPage } from "@/utils/auth";
 import Link from "next/link";
 
 export default async function HomePage() {
     const session = await protectPage();
-    console.log("PAGE:", session.user);
     return (
         <div>
             <h1>Home</h1>
@@ -16,10 +14,7 @@ export default async function HomePage() {
                 <Link href="/whoami">Who am i?</Link>
             </div>
 
-            <form action={async () => {
-                "use server";
-                await signOut({redirectTo: "/welcome"});
-            }}>
+            <form action="/api/logout" method="POST">
                 <button type="submit">Sign out</button>
             </form>
         </div>
