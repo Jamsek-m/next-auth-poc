@@ -1,8 +1,13 @@
 # OpenId Connect Next Login Example
 
 ## Usage
+To provide required env, simpy run:
 
-Required env file content:
+```
+cp env.template .env.local
+```
+
+And fill values:
 
 ```
 AUTH_SECRET=
