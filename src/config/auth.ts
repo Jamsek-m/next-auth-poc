@@ -7,6 +7,7 @@ export type AppSession = DefaultSession & {
     user: {
         user_id: string;
     },
+    error?: "RefreshAccessTokenError";
 }
 
 export const { handlers, signIn, signOut, auth } = NextAuth({

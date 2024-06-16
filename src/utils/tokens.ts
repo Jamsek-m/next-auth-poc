@@ -17,6 +17,8 @@ export async function refreshAccessToken(clientId: string, clientSecret: string,
     });
 
     if (!response.ok || response.status >= 400) {
+        const errPayload = await response.json();
+        console.error(errPayload);
         throw new Error(`Error refreshing tokens! ${response.status}`);
     }
 
